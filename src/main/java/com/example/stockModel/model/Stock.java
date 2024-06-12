@@ -1,14 +1,9 @@
 package com.example.stockModel.model;
 
-// import java.util.String;
-
-public class Stock {
+public class Stock extends Security {
     
     private String tickerSymbol;
     private String companyName;
-    private double closingPrice;
-    private double openingPrice;
-    private String date;
     private String industryGroup;
     
     public Stock(String tickerSymbol, String companyName, double closingPrice, double openingPrice, String String, String industryGroup) {
@@ -18,6 +13,7 @@ public class Stock {
         this.openingPrice = openingPrice;
         this.date = String;
         this.industryGroup = industryGroup;
+        this.type = "Stock";
     }
     
     public String getTickerSymbol() { return this.tickerSymbol; }
