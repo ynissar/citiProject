@@ -1,8 +1,20 @@
+getMarketName();
 getStockTable();
-document.getElementById('add-stock').addEventListener('submit', addStock);
+document.getElementById('buy-stock').addEventListener('submit', addStock);
 document.getElementById('edit-stock').addEventListener('submit', editStock);
 document.getElementById('stock-ticker-search').addEventListener('submit', searchStockByTicker);
-// document.getElementById('delete-stock').addEventListener('submit',deleteStock);
+document.getElementById('sell-stock').addEventListener('submit', deleteStock);
+
+async function getMarketName() {
+    try {
+        const response = await fetch('http://localhost:8080/stock/market');
+        const market  = await response.text();
+        document.getElementById('market-name').textContent = "Market: " + market;
+    } catch (error) {
+        throw new Error("Response from network not okay")
+    }
+
+}
 
 async function getStockTable() {
     try {
@@ -23,11 +35,11 @@ async function getStockTable() {
             const actionsCell = row.insertCell(6);
 
             const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add("secondary");
+            deleteButton.textContent = 'Sell';
             deleteButton.addEventListener('click', () => deleteStock(stock.tickerSymbol));
             actionsCell.appendChild(deleteButton);
         });
-        // console.log(rows);
         document.getElementById('stock-table-body').innerHTML = rows;
     } catch (error) {
         throw new Error("Response from network not okay")
@@ -41,7 +53,8 @@ async function addStock(event) {
     const companyName = document.getElementById('add-name').value;
     const closingPrice = document.getElementById('add-closing-price').value;
     const openingPrice = document.getElementById('add-opening-price').value;
-    const date = document.getElementById('add-date').value;
+    const d = new Date();
+    const date = d.toString();
     const industryGroup = document.getElementById('add-industry').value;
     try {
         const response = await fetch(`http://localhost:8080/stock`, {
@@ -68,7 +81,8 @@ async function editStock(event) {
     const companyName = document.getElementById('edit-name').value;
     const closingPrice = document.getElementById('edit-closing-price').value;
     const openingPrice = document.getElementById('edit-opening-price').value;
-    const date = document.getElementById('edit-date').value;
+    const d = new Date();
+    const date = d.toString();
     const industryGroup = document.getElementById('edit-industry').value;
     
     try {
@@ -134,8 +148,9 @@ async function searchStockByTicker(event) {
 
 async function deleteStock(tickerSymbol) {
     console.log("delete stock");
-
-    try {        
+    
+    try {    
+        console.log("ticker Symbol: " + tickerSymbol)
         const response = await fetch(`/stock/index/${tickerSymbol}`, {
             method: 'DELETE',
         });

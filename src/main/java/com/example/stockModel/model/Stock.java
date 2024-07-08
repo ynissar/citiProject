@@ -1,6 +1,8 @@
 package com.example.stockModel.model;
 
 public class Stock extends Security {
+
+    // We are an exchange that publishes stocks on behlaf of company securities.
     
     private String tickerSymbol;
     private String companyName;

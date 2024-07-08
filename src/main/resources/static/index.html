@@ -4,38 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock API Demo</title>
+    <title>Stocks 4 You</title>
     <link rel="stylesheet" href="styles.css">
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+/>
+
+<style>
+    h1 {
+        text-align: center;
+    }
+</style>
 </head>
 
-<body>
-    <h1>Stock API Demo</h1>
 
-    <h2>Stocks List</h2>
+<body class="container">
+    <h1>Stocks 4 You</h1>
+    <h2 id=market-name></h2>
+
+    <h2>Exchange</h2>
     <table id="stock-table">
         <thead>
             <tr>
-                <th>Ticker Symbol</th>
-                <th>Company Name</th>
-                <th>Closing Price</th>
-                <th>Opening Price</th>
-                <th>Date</th>
-                <th>Industry Group</th>
-                <th>Actions</th>
+                <th scope="col">Ticker Symbol</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Closing Price</th>
+                <th scope="col">Opening Price</th>
+                <th scope="col">Date</th>
+                <th scope="col">Industry Group</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody id="stock-table-body"></tbody>
     </table>
     
-    <h2>Add Stock</h2>
-    <form id="add-stock">
+    <h2>Buy Stock</h2>
+    <form id="buy-stock">
         <input type="text" id="add-ticker" placeholder="Ticker Symbol" required>
         <input type="text" id="add-name" placeholder="Company Name" required>
         <input type="number" id="add-closing-price" placeholder="Closing Price" required step="0.01">
         <input type="number" id="add-opening-price" placeholder="Opening Price" required step="0.01">
-        <input type="text" id="add-date" placeholder="Date" required>
         <input type="text" id="add-industry" placeholder="Industry Group" required>
-        <button type="submit">Add Stock</button>  
+        <button type="submit">Buy Stock</button>  
     </form>
     
     <h2>Edit Stock</h2>
@@ -44,7 +55,6 @@
         <input type="text" id="edit-name" placeholder="Company Name" required>
         <input type="number" id="edit-closing-price" placeholder="Closing Price" required step="0.01">
         <input type="number" id="edit-opening-price" placeholder="Opening Price" required step="0.01">
-        <input type="text" id="edit-date" placeholder="Date" required>
         <input type="text" id="edit-industry" placeholder="Industry Group" required>
         <button type="submit">Edit Stock</button>  
     </form>
